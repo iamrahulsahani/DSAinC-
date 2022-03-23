@@ -6,4 +6,5 @@ int main()
    cout<<"Enter a string:\n";
    cin>>s;
    cout<<"Entered string: "<<s;
+   return 0;
 }
