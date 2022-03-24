@@ -1,18 +1,21 @@
 #include<iostream>
 using namespace std;
 
-int sumOfDigit(int n)
+void naturalNumbers(int n)
 {
-   if(n==0)          
-   {                    
-      return 0;
+   if(n==1)
+   {
+      cout<<1;
+      return;
    }
-   return (n%10+sumOfDigit(n/10));
+   naturalNumbers(n-1);
+   cout<<n;
 }
 
 int main()
 {
-   int n=123;
-   cout<<sumOfDigit(n);
+   int n=5;
+   naturalNumbers(n);
    return 0;
 }
+
