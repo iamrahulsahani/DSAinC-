@@ -1,27 +1,18 @@
 #include<iostream>
 using namespace std;
 
+int sumOfDigit(int n)
+{
+   if(n==0)          
+   {                    
+      return 0;
+   }
+   return (n%10+sumOfDigit(n/10));
+}
+
 int main()
 {
-   int a[] = {3,-7,4,2};
-   int current_max=0;
-   int global_max=0;
-   for(int i=0;i<=3;i++)
-   {
-      current_max += a[i];
-      if(current_max<a[i])
-      {
-         current_max = a[i];
-      }
-
-      if(global_max<current_max)
-      {
-         global_max = current_max;
-      }
-   }
-
-cout<<current_max<<endl;
-cout<<global_max;
-
-   
+   int n=123;
+   cout<<sumOfDigit(n);
+   return 0;
 }
