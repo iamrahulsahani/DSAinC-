@@ -1,21 +1,16 @@
 #include<iostream>
 using namespace std;
-
-void naturalNumbers(int n)
-{
-   if(n==1)
-   {
-      cout<<1;
-      return;
-   }
-   naturalNumbers(n-1);
-   cout<<n;
-}
-
 int main()
 {
-   int n=5;
-   naturalNumbers(n);
-   return 0;
+   int a=17,b=34,hcf,larger;
+   larger = (a>b)?a:b;
+   for(int i=larger;i>=1;i--)
+   {
+       if(a%i==0 && b%i==0)
+       {
+           hcf=i;
+           break;
+       }
+   }
+   cout<<hcf;
 }
-

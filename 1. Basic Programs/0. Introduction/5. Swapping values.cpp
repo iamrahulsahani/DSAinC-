@@ -10,3 +10,11 @@ int main()
     y = temp;
     cout<<"x ="<<x<<endl<<"y = "<<y;
 }
+//----------------using inbult function------------------------------------
+// int main()
+// {
+//     int x=10,y=20;
+//     swap(x,y);
+//     cout<<"x="<<x<<endl;
+//     cout<<"y="<<y;
+// }
