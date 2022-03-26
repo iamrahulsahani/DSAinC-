@@ -11,9 +11,9 @@ int main()
       flag = 0;
       break;
    }
-   if (flag==1)
-   cout<<"Prime";
-   else
+   if (flag==1)     //or      //check if(i>n/2) it means it is prime number
+   cout<<"Prime";             //that's why i got incremented upto the last iteration
+   else                       //flag is not required in this logic
    cout<<"Not Prime";
 
 
