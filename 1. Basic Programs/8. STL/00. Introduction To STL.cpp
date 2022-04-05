@@ -15,7 +15,8 @@ it actually acts as a bridge between containers & algorithms.
 */
 
 
-
+//Numeric Array : The array that contains numeric index.(array)
+//Associative Array : The array that do not contains numeric index.(dictionary)
 
 
 
