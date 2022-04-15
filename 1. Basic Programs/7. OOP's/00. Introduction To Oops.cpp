@@ -10,6 +10,30 @@ Principles of OOP's:
 
 Note : By default everything is private in c++.
 
+ways of creating objects in c++:
+Human h; //stack
+Human *h = new Human(); //heap
+Human *h = new Human; //heap
+
+ways of using members:
+for stack:-
+h.introduce();
+for heap:-
+h->introduce();
+
+Types of functions in a class:
+constructors: Rectangle();
+mutator : setLength();
+accessor : getLength();
+facilitators : area();
+enquiry : isSquare();
+destructor : ~ Rectangle();
+
+Note : The declarations of functions should be inside class & it's
+definition should be outside of class.
+
+
+
 
 
 */
