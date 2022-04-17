@@ -32,25 +32,6 @@ void insertAtEnd(Node* &head, int val)
     
 }
 
-void deleteLastNode(Node* &head)
-{
-    if(head==NULL)
-    {
-        cout<<"List is empty;";
-        return;
-    }
-    Node* p = head;
-    while(p->next!=NULL)
-    {
-        if(p->next->next==NULL)
-        {
-            p->next=NULL;
-        }
-        p=p->next;
-    }
-    delete p; //kept the delete out of loop so that p can reach to last node & we can free memory of last node
-}
-
 void display(Node* head)
 {
     Node* p=head;
@@ -61,6 +42,22 @@ void display(Node* head)
     }
 }
 
+int length(Node *head)
+{
+    if(head==NULL)
+    {
+        return 0;
+    }
+    Node*p = head;
+    int count = 1;
+    while(p->next!=NULL)
+    {
+        count+=1;
+        p = p->next;
+    }
+    return count;
+    
+}
 
 int main()
 {
@@ -72,9 +69,5 @@ int main()
     insertAtEnd(head, 5);
     insertAtEnd(head, 6);
 
-    display(head);
-    cout<<endl;
-    deleteLastNode(head);
-    display(head);
-
+    cout<<length(head);
 }
