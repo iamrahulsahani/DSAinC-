@@ -6,158 +6,135 @@ class Node
     public:
         int data;
         Node* next;
-        Node* prev;
         Node(int val)
         {
             data = val;
             next = NULL;
-            prev = NULL;
         }
 };
 
 void insertAtBeg(Node* &head, int val)
 {
     Node* temp = new Node(val);
-    if(head==NULL)
+    if(head == NULL)
     {
+        temp->next = temp;
         head = temp;
         return;
     }
+    Node* p = head;
+    while(p->next!=head)
+    {
+        p = p->next;
+    }
+    p->next = temp;
     temp->next = head;
-    head->prev = temp;
-    head = temp; //pointing head to new temp node for making it first node
-
+    head = temp;
 }
 
 void insertAtEnd(Node* &head, int val)
 {
     Node* temp = new Node(val);
+    Node* p = head;
     if(head==NULL)
     {
+        temp->next = temp;
         head = temp;
         return;
     }
-    Node* p = head;
-
-    while(p->next!=NULL)
+    while(p->next!=head)
     {
         p = p->next;
     }
     p->next = temp;
-    temp->prev = p;
+    temp->next = head;
 }
 
 void insertAtPos(Node* &head, int val, int pos)
 {
-    Node* temp = new Node(val);
-    if(head==NULL)
-    {
-        head = temp;
-        return;
-    }
-    Node* p = head;
     int count = 1;
-    if(pos == 0) //when making temp node as first node
+    Node* p = head;
+    Node* temp = new Node(val);
+    if(pos == 0)
     {
-        temp->next = p;
-        p->prev = temp;
-        head = temp; // making this temp node as first node by pointing head to new temp node
+        insertAtBeg(head, val);
         return;
     }
-    while(p!=NULL)//inserting temp node in any position other tahn first & last.
+    while(p->next!=head)
     {
         if(count == pos)
         {
             temp->next = p->next;
-            p->next->prev = temp;
             p->next = temp;
-            temp->prev = p;
-            return;
-        }
-        if(p->next->next == NULL) //when making this temp node as last node(p->next->next means last second node)
-        {
-            p->next->next = temp;
-            temp->prev = p->next->next;
             return;
         }
         p = p->next;
         count++;
     }
-    
-
+    insertAtEnd(head, val);
 }
 
 void deleteFirstNode(Node* &head)
 {
-    if(head==NULL)
+    Node* p = head;
+    if(head->next == head) //when there is only 1 node
     {
-        cout<<"List is empty;";
+        head = NULL;
+        delete p;
         return;
     }
-    Node *p = head;
-    head = head->next;
-    delete p;
+    Node* temp = head; //to free memory
+    while(p->next!=head)
+    {
+        p = p->next;
+    }
+    p->next = temp->next;
+    head = temp->next;
+    delete temp;
 }
 
 void deleteLastNode(Node* &head)
 {
-    if(head==NULL)
+    Node* p = head;
+    if(head->next == head) //when there is only 1 node
     {
-        cout<<"List is empty;";
+        head = NULL;
+        delete p;
         return;
     }
-    Node *p = head;
-    while(p!=NULL)
+    while(p->next->next!=head)
     {
-        if(p->next->next == NULL) //p->next->next means second last node
-        {
-            p->next = NULL; 
-        }
         p = p->next;
     }
+    p->next = head;
     delete p;
 }
 
 void deleteByIndex(Node* &head, int pos)
 {
-    if(head==NULL)
-    {
-        cout<<"List is empty;";
-        return;
-    }
     Node* p = head;
     int count = 1;
-    if(pos == 1)
+    while(p->next!=head)
     {
-        p->next->prev = NULL;
-        head = p->next;
-        delete p;
-        return;
-    }
-    while(p!=NULL)
-    {
-        if(count==pos)
+        if(pos==count+1)
         {
-            p->prev->next = p->next;
-            p->next->prev = p->prev;
+            p->next = p->next->next;
             delete p;
             return;
-        }
-        if(p->next->next == NULL)
-        {
-            p->next = NULL;
         }
         p = p->next;
         count++;
     }
-    delete p;
-    return;
+    if(pos==1)
+    {
+        deleteFirstNode(head);
+    }
 }
 
 bool search(Node* head, int key)
 {
-    Node *p = head;
-    while(p!=NULL)
+    Node* p = head;
+    while(p->next!=head)
     {
         if(key == p->data)
         {
@@ -165,17 +142,31 @@ bool search(Node* head, int key)
         }
         p = p->next;
     }
+    if(p->data == key)
+    {
+        return true;
+    }
     return false;
 }
 
 int length(Node* head)
 {
-    int count = 0;
     Node* p = head;
-    while(p!=NULL)
     {
-        count += 1;
+        if(p == NULL)
+        {
+            return 0;
+        }
+    }
+    int count = 0;
+    while(true)
+    {
         p = p->next;
+        count++;
+        if(p==head)
+        {
+            break;
+        }
     }
     return count;
 }
@@ -183,24 +174,28 @@ int length(Node* head)
 void display(Node* head)
 {
     Node* p = head;
-    while(p!=NULL)
+    while(true)
     {
         cout<<p->data<<" ";
         p = p->next;
+        if(p==head)
+        {
+            break;
+        }
     }
 }
 
+
 int main()
 {
+    Node* head = NULL;
+    insertAtEnd(head, 1);
+    insertAtEnd(head, 2);
+    insertAtEnd(head, 3);
+    insertAtEnd(head, 4);
+    insertAtEnd(head, 5);
 
-Node* head = NULL;
-insertAtEnd(head, 1);
-insertAtEnd(head, 2);
-insertAtEnd(head, 3);
-insertAtEnd(head, 4);
-
-display(head);
-cout<<endl;
-cout<<length(head);
-    
+    display(head);
+    cout<<endl;
+    cout<<length(head);
 }
